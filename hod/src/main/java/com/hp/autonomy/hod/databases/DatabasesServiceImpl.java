@@ -14,6 +14,7 @@ import lombok.Data;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Data
 public class DatabasesServiceImpl implements DatabasesService {
@@ -55,22 +56,19 @@ public class DatabasesServiceImpl implements DatabasesService {
 
         final Set<Resource> privateResources = new HashSet<>();
 
-        for (final Resource resource : resources.getResources()) {
-            if (CONTENT_FLAVOURS.contains(resource.getFlavour())) {
-                privateResources.add(resource);
-                privateResourceNames.add(resource.getResource());
-            }
-        }
+        resources.getResources().stream()
+                .filter(resource -> CONTENT_FLAVOURS.contains(resource.getFlavour()))
+                .forEach(resource -> {
+            privateResources.add(resource);
+            privateResourceNames.add(resource.getResource());
+        });
 
         databases.addAll(resourceMapper.map(tokenProxy, privateResources, domain));
 
-        final Set<Resource> publicResources = new HashSet<>();
-
-        for (final Resource resource : resources.getPublicResources()) {
-            if (!privateResourceNames.contains(resource.getResource())) {
-                publicResources.add(resource);
-            }
-        }
+        final Set<Resource> publicResources = resources.getPublicResources()
+                .stream()
+                .filter(resource -> !privateResourceNames.contains(resource.getResource()))
+                .collect(Collectors.toSet());
 
         databases.addAll(resourceMapper.map(tokenProxy, publicResources, ResourceIdentifier.PUBLIC_INDEXES_DOMAIN));
 

@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -54,13 +55,10 @@ public class ResourceMapperTest {
         final IndexFieldsService indexFieldsService = mock(IndexFieldsService.class);
 
         for(final Map.Entry<Resource, Set<String>> resourceEntry : RESOURCES.entrySet()) {
-            when(indexFieldsService.getParametricFields(new ResourceIdentifier(DOMAIN, resourceEntry.getKey().getResource()))).thenAnswer(new Answer<Object>() {
-                @Override
-                public Object answer(final InvocationOnMock invocation) throws Throwable {
-                    TimeUnit.SECONDS.sleep(1);
+            when(indexFieldsService.getParametricFields(new ResourceIdentifier(DOMAIN, resourceEntry.getKey().getResource()))).thenAnswer(invocation -> {
+                TimeUnit.SECONDS.sleep(1);
 
-                    return resourceEntry.getValue();
-                }
+                return resourceEntry.getValue();
             });
         }
 
@@ -75,17 +73,13 @@ public class ResourceMapperTest {
     @Test
     public void testResourceMapper() throws HodErrorException {
         final Set<Database> databases = resourceMapper.map(null, RESOURCES.keySet(), DOMAIN);
-        final Set<Database> expectation = new HashSet<>();
-
-        for (final Map.Entry<Resource, Set<String>> resource : RESOURCES.entrySet()) {
-            expectation.add(new Database.Builder()
+        final Set<Database> expectation = RESOURCES.entrySet().stream().map(resource -> new Database.Builder()
                 .setName(resource.getKey().getResource())
                 .setDisplayName(resource.getKey().getDisplayName())
                 .setIndexFields(resource.getValue())
                 .setDomain(DOMAIN)
                 .setIsPublic(false)
-                .build());
-        }
+                .build()).collect(Collectors.toSet());
 
         assertThat(databases, is(expectation));
     }

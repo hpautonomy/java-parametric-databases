@@ -85,12 +85,12 @@ public class IdolParametricValuesService implements ParametricValuesService<Idol
             for (final FlatField field : fields) {
                 final List<JAXBElement<? extends Serializable>> valueElements = field.getValueOrSubvalueOrValues();
                 final LinkedHashSet<QueryTagCountInfo> values = new LinkedHashSet<>(valueElements.size());
-                for (final JAXBElement<?> element : valueElements) {
-                    if (VALUE_NODE_NAME.equals(element.getName().getLocalPart())) {
-                        final TagValue tagValue = (TagValue) element.getValue();
-                        values.add(new QueryTagCountInfo(tagValue.getValue(), tagValue.getCount()));
-                    }
-                }
+                valueElements.stream()
+                        .filter(element -> VALUE_NODE_NAME.equals(element.getName().getLocalPart()))
+                        .forEach(element -> {
+                            final TagValue tagValue = (TagValue) element.getValue();
+                            values.add(new QueryTagCountInfo(tagValue.getValue(), tagValue.getCount()));
+                        });
                 final String fieldName = getFieldNameFromPath(field.getName().get(0));
                 if (!values.isEmpty()) {
                     results.add(new QueryTagInfo(fieldName, values));

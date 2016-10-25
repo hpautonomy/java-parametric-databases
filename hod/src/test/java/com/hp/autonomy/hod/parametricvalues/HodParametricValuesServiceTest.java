@@ -108,7 +108,7 @@ public class HodParametricValuesServiceTest {
                 .addParametricValue("football field", fieldsOfFootball)
                 .addParametricValue("grassy field", fieldsOfGrass)
                 .addParametricValue("wasteland", fieldsOfWaste)
-                .addParametricValue("empty field", new LinkedHashMap<String, Integer>())
+                .addParametricValue("empty field", new LinkedHashMap<>())
                 .build();
 
         //noinspection unchecked
