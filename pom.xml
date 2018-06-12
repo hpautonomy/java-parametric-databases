@@ -25,7 +25,7 @@
 
     <description>Java Client for retrieving parametric values</description>
 
-    <url>https://github.com/hpautonomy/java-parametric-databases</url>
+    <url>https://github.com/microfocus-idol/java-parametric-databases</url>
 
     <licenses>
         <license>
@@ -37,34 +37,25 @@
     <inceptionYear>2015</inceptionYear>
 
     <scm>
-        <connection>scm:git:git@github.com:hpautonomy/java-parametric-databases.git</connection>
-        <developerConnection>scm:git:git@github.com:hpautonomy/java-parametric-databases.git</developerConnection>
-        <url>git@github.com:hpautonomy/java-parametric-databases.git</url>
+        <connection>scm:git:git@github.com:microfocus-idol/java-parametric-databases.git</connection>
+        <developerConnection>scm:git:git@github.com:microfocus-idol/java-parametric-databases.git</developerConnection>
+        <url>git@github.com:microfocus-idol/java-parametric-databases.git</url>
     </scm>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/hpautonomy/java-parametric-databases/issues</url>
+        <url>https://github.com/microfocus-idol/java-parametric-databases/issues</url>
     </issueManagement>
 
     <developers>
         <developer>
             <name>Daniel Grayling</name>
-            <email>daniel.grayling@hpe.com</email>
-            <organization>HP</organization>
-            <organizationUrl>http://www.hp.com</organizationUrl>
         </developer>
         <developer>
             <name>Ivo Miller</name>
-            <email>ivo.miller@hpe.com</email>
-            <organization>Hewlett-Packard Enterprise</organization>
-            <organizationUrl>http://www.hpe.com</organizationUrl>
         </developer>
         <developer>
             <name>Will Byrne</name>
-            <email>will.byrne@hpe.com</email>
-            <organization>Hewlett-Packard Enterprise</organization>
-            <organizationUrl>http://www.hpe.com</organizationUrl>
         </developer>
     </developers>
 
