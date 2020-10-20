@@ -14,8 +14,7 @@ By retaining a mapping of the indexes to their index field from the request from
 build the index fields for given indexes needed by this api itself.
 
 ## License
-Copyright 2014-2015 Hewlett-Packard Development Company, L.P.
-Copyright 2015-2016 Hewlett Packard Enterprise Development LP
-Copyright 2017-2018 Micro Focus International plc.
+
+(c) Copyright 2014-2018 Micro Focus or one of its affiliates.
 
 Licensed under the MIT License (the "License"); you may not use this project except in compliance with the License.
